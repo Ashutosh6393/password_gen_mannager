@@ -10,7 +10,10 @@ window.configure(background="#999999")
 window.resizable(0, 0)
 
 #  All MySQL
-
+"""
+mysql database connection 
+passwd :- change password too your database password
+"""
 try:
     my_db = my_sq.connect(host='localhost', user='root', passwd='', )
     my_cur = my_db.cursor()
@@ -39,7 +42,9 @@ except Exception:
 
 
 #  ALL DEF
-
+"""
+get length from user and generate password
+"""
 def generate():
     try:
         if E3.get() == '':
@@ -70,7 +75,9 @@ def generate():
     except ValueError:
         messagebox.showwarning('Error', 'Input Length in Natural Numbers')
 
-
+"""
+save password in database
+"""
 def save_pass():
     try:
         if E1.get == '' or E2.get() == '' or E3.get() == '':
@@ -98,7 +105,9 @@ def save_pass():
     except Exception:
         messagebox.showinfo('Error', 'Information Not Saved. It seems that you are not connected to MySQL Server')
 
-
+""" 
+export all password entries to excel sheet from database
+"""
 def save_excel():
     try:
         my_cur.execute('SELECT * FROM password')
@@ -113,7 +122,9 @@ def save_excel():
         messagebox.showinfo('Error', 'Unable to fetch data from database. Make sure you are connected to the MySQL '
                                      'server.')
 
-
+"""
+show the gui window
+"""
 def secure():
     B5["state"] = DISABLED
 
@@ -123,7 +134,9 @@ def secure():
     root.configure(background='#999999')
     root.iconbitmap('ico.ico')
     root.resizable(0, 0)
-
+    """
+    close GUI window
+    """
     def dele():
         try:
             root.destroy()
@@ -152,7 +165,9 @@ def secure():
                 password = password.replace(a, b)
             T1.insert(END, password)
             b2["state"] = NORMAL
-
+    """
+    save password in database 
+    """
     def savesp():
         try:
             if E1.get() == '' or E2.get() == '':
@@ -206,7 +221,9 @@ def secure():
 
     mainloop()
 
-
+"""
+all password show window
+"""
 def showpass():
     try:
         B1["state"] = DISABLED
@@ -235,7 +252,9 @@ def showpass():
                       str(row[0]) + '   ||     ' + str(row[1]) + '   ||    ' + str(row[2]) + '   ||     ' + str(
                 row[3]) + '    ||    ' + str(row[4]) + '   ||        ' + str(row[5]))
             n = n + 1
-
+        """
+        delete all password from database 
+        """
         def deleteAll():
             msg = messagebox.askyesno('Alert', 'Do you want to delete all saved passwords from database')
             if msg:
@@ -245,7 +264,9 @@ def showpass():
 
             else:
                 pass
-
+        """ 
+        delete only selected password from database
+        """
         def deleteselected():
 
             xs = messagebox.askyesno('Alert', 'Do you want to permanently delete the password from database')
@@ -271,7 +292,9 @@ def showpass():
                 lb.delete(ANCHOR)
             else:
                 return
-
+        """
+        Close main window
+        """
         def delt():
             try:
                 win.destroy()
